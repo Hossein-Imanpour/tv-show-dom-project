@@ -83,10 +83,5 @@ function dataRender(arr){
                 
                 };
 
-                // ==== search part
-
-                inputEl.onkeyup = function (){
-                    let result = inputEl.value.toLowerCase();
-                    searchOperation(result)
-                }
-
+      
+             
