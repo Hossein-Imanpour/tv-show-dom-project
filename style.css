@@ -84,7 +84,6 @@ body{
     /* background-color: rgb(168, 177, 201); */
     /* background-color: rgb(188, 221, 236); */
     background-color:rgb(173, 173, 173);
-    cursor: pointer;
     padding: 1rem;
     border-radius: .5rem;
     position: relative;
@@ -120,6 +119,9 @@ body{
     margin-left: 1.5rem;
     font-size: 1.1rem;
     font-family: 'Sevillana', cursive;
+    position: absolute;
+    bottom: 10%;
+    left: 30%;
 }
 .footerText{
     display: none;
