@@ -51,8 +51,8 @@ selectOption.addEventListener('change' , (e)=>{
 //======================================
 let detail = null;
 async function fetchEpisode () {
-    // const resolve = await fetch('file.json');
-    const resolve = await fetch('https://api.tvmaze.com/shows/82/episodes');
+    const resolve = await fetch('file.json');
+    // const resolve = await fetch('https://api.tvmaze.com/shows/82/episodes');
     const data = await resolve.json();
     detail = data;
     // console.log(detail);
