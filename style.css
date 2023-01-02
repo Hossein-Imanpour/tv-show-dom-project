@@ -34,7 +34,13 @@ body{
 
 }
 .val:focus{
-    outline: none;
+    /* outline: rgb(16, 16, 187); */
+    /* outline-style: solid; */
+    /* outline: none; */
+    outline-color: aqua;
+    outline-width: .2rem;
+    transition: ease-in-out .1s;
+    /* border: #ccc; */
 }
 .text{
     font-family: 'Sevillana', cursive;
@@ -84,7 +90,7 @@ body{
     /* background-color: rgb(168, 177, 201); */
     /* background-color: rgb(188, 221, 236); */
     background-color:rgb(173, 173, 173);
-    cursor: pointer;
+    /* cursor: pointer; */
     padding: 1rem;
     border-radius: .5rem;
     position: relative;
