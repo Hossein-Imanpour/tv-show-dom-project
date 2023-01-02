@@ -1,4 +1,6 @@
 const $ = document;
+function all(){
+
 const headEl = $.createElement("header"); headEl.classList.add('head')
 const mainEl = $.createElement("section"); mainEl.classList.add('main')
 const footEl = $.createElement("footer");
@@ -8,24 +10,59 @@ const p = $.createElement('p') ; p.classList.add('text'); p.textContent = 'TV SH
 const selectOption = $.createElement('select') ; headEl.appendChild(selectOption); selectOption.classList.add('selectItem');
 const opGroup = $.createElement('option'); opGroup.innerHTML = 'All Episode'; selectOption.appendChild(opGroup) ; opGroup.classList.add('all-episode') 
 const option = $.createElement('option'); option.classList.add('op');
+//==
+inputEl.addEventListener("input" , (e) =>{
+    // console.log($.querySelectorAll(".card").getAttribute("data-name"));
+    let data = $.querySelectorAll(".card");
+   let result = e.target.value
+   for(let card of data){
+    const episodeName = card.getAttribute('data-name');
+    const episodeSummary = card.getAttribute('data-summary')
+    if(episodeName.toLowerCase().includes(result.toLowerCase()) ||
+    episodeSummary.toLowerCase().includes(result.toLowerCase())
+    ){
+        card.style.display = 'inline-block';
+    }else{
+        card.style.display = 'none';
+    }
+   }
+});
 
+selectOption.addEventListener('change' , (e)=>{
+    let data = $.querySelectorAll(".card");
+    let result = e.target.value;
+    console.log(result);
+    for(let card of data){
+        const episodeName = card.getAttribute('data-name');
+        
+        if(result == "All Episode"){
+            card.style.display = 'inline-block'; 
+        }else if(result.toLowerCase().includes(episodeName.toLowerCase())){
+            card.style.display = 'inline-block'; 
+        }else{
+            card.style.display = 'none';
+        }
+    }
+})
+}
+// let search_term = '';
 //==
 // const API_URL = 'https://fakestoreapi.com/products';
 //======================================
-
 let detail = null;
 async function fetchEpisode () {
-    const resolve = await fetch('file.json');
+    // const resolve = await fetch('file.json');
+    const resolve = await fetch('https://api.tvmaze.com/shows/82/episodes');
     const data = await resolve.json();
-
     detail = data;
     // console.log(detail);
+    // renderSelect()
+    all()
     dataRender(detail);
+    // liveSearch(detail)
 }
 fetchEpisode()
-
-
-
+//==
 function dataRender(arr){
              arr.forEach(episode => {
                 // console.log(episode);
@@ -35,9 +72,11 @@ function dataRender(arr){
                 const option = $.createElement('option');
                 option.classList.add(".op")
                 
-                const cardDiv =$.createElement('div'); cardDiv.classList.add('card') ; mainEl.appendChild(cardDiv);
-                      
-                selectOption.appendChild(option)
+                
+                const cardDiv =$.createElement('div'); cardDiv.classList.add('card') ; $.querySelector('.main').appendChild(cardDiv);
+                  cardDiv.setAttribute("data-name" , name );
+                  cardDiv.setAttribute('data-summary' , summary)    
+                $.querySelector(".selectItem").appendChild(option)
                 cardDiv.append(pEl); 
                 const img = $.createElement("img"); img.src = image.medium ; cardDiv.appendChild(img) ;img.classList.add('img')
                         const episodeSpan = $.createElement('span') ; cardDiv.appendChild(episodeSpan); episodeSpan.classList.add('card-span')
@@ -54,34 +93,19 @@ function dataRender(arr){
                       downLoad.target = '-blank'
                       downLoad.classList.add('link') ; downLoad.innerHTML = 'DOWNLOAD'
                       cardDiv.appendChild(downLoad);
-                      
-
-
-                      //===========
-                      
-                     
-                     
-                    
-                    //===
-                    });//end of first loop!
-                    //==
-                    // arr.forEach((episode)=>{
-
-                    //     // console.log(episode);
-                    //     // inputEl.addEventListener('input' , ()=>{
-                    //     //     const {name} = episode;
-
-                    //     //     console.log(inputEl.value);
-
-                    //     // })
-                        
-                       
-
-
-                    // });
-                
-                
+                });//end of first loop!
                 };
 
-      
-             
+                //== live search
+
+                // function liveSearch(data , value){
+                //     const cards = $.querySelector(".card");
+                //     if(value){
+                //         cards && cards.remove();
+                //         const filterEpisode = data.filter(
+                //             ({name})
+                //         )
+                //     }
+                // }
+
+               
